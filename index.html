@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Social Media Follower Layout</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            body {
+                font-family: "Inter", sans-serif;
+                background-color: #f7f9fc;
+            }
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            }
+            .accordion-content.active {
+                max-height: 200px; /* Adjust as needed */
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+            .accordion-item.active .accordion-icon {
+                transform: rotate(180deg);
+            }
+
+            .selected-btn {
+                background-color: #374151; /* A darker gray to indicate selection */
+                color: white;
+                border-color: #4b5563;
+            }
+
+            .selected-btn svg {
+                fill: white;
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translateY(0px);
+                }
+                50% {
+                    transform: translateY(-8px);
+                }
+                100% {
+                    transform: translateY(0px);
+                }
+            }
+            .phone-mockup {
+                animation: float 3s ease-in-out infinite;
+            }
+
+            .phone-mockup .button-group button {
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+            }
+
+            .phone-mockup .button-group button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .hidden {
+                display: none !important;
+            }
+
+            /* Fade-in animation for feature cards */
+            .feature-card {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+
+            .feature-card.animate-fade-in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .feature-card.delay-100 {
+                transition-delay: 100ms;
+            }
+            .feature-card.delay-200 {
+                transition-delay: 200ms;
+            }
+            .feature-card.delay-300 {
+                transition-delay: 300ms;
+            }
+            .feature-card.delay-400 {
+                transition-delay: 400ms;
+            }
+            .feature-card.delay-500 {
+                transition-delay: 500ms;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav
+            class="w-full bg-slate-900 text-white py-4 px-6 md:px-12 flex items-center justify-between"
+        >
+            <div class="flex items-center space-x-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-blue-500"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.5 10.5V6a2.25 2.25 0 0 0-2.25-2.25H6L5.25 3H3a.75.75 0 0 0-.75.75v16.5c0 .414.336.75.75.75h2.25l.75-.75h4.5a2.25 2.25 0 0 0 2.25-2.25v-4.5h2.25L18 12.75h3.75a.75.75 0 0 0 .75-.75v-1.5a.75.75 0 0 0-.75-.75H18L15.75 9Z"
+                    />
+                </svg>
+                <span class="font-bold text-lg">Subsunlock</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-white hover:text-gray-300"> Home </a>
+                <a href="#" class="text-white hover:text-gray-300">
+                    Features
+                </a>
+                <a href="#" class="text-white hover:text-gray-300"> Faq </a>
+                <a href="#" class="text-white hover:text-gray-300"> Contact </a>
+            </div>
+            <button
+                class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+                Get started
+            </button>
+        </nav>
+
+        <!-- Hero Section -->
+        <header
+            class="w-full bg-slate-900 text-white text-center rounded-b-[4rem] p-8 md:p-16 relative overflow-hidden"
+        >
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800 opacity-90"
+            ></div>
+            <div
+                class="relative max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12"
+            >
+                <!-- Left Side (Text Content) -->
+                <div class="md:w-1/2 w-full text-center md:text-left space-y-4">
+                    <div
+                        class="inline-flex items-center space-x-2 px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase"
+                    >
+                        <span class="text-yellow-400">Now</span>
+                        <span class="text-white"
+                            >Best Sub to Unlock Service</span
+                        >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-3 h-3 text-yellow-400 animate-pulse"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.042 21.672 13.623 11.23a.75.75 0 0 1 .87-1.04l3.153 1.577a.75.75 0 0 0 1.04-.87L15.328 3.958a.75.75 0 0 0-1.04.87l1.419 10.442a.75.75 0 0 1-.87 1.04l-3.153-1.577a.75.75 0 0 0-1.04.87l1.672 3.344Z"
+                            />
+                        </svg>
+                    </div>
+                    <h1
+                        class="text-4xl md:text-5xl font-extrabold leading-tight"
+                    >
+                        Monetize your content with Subsunlock
+                    </h1>
+                    <p class="text-gray-300 text-lg max-w-xl mx-auto md:mx-0">
+                        Turn your followers into subscribers with our sub to
+                        unlock system. Generate Subsunlock links that only open
+                        when users subscribe to your social media.
+                    </p>
+                    <div
+                        class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 pt-4"
+                    >
+                        <button
+                            class="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition-colors"
+                        >
+                            Create link
+                        </button>
+                        <button
+                            class="bg-transparent border border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white/10 transition-colors"
+                        >
+                            Join now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Side (Mobile Mockup) -->
+                <div
+                    class="md:w-1/2 w-full flex-shrink-0 flex justify-center mt-8 md:mt-0"
+                >
+                    <div
+                        class="phone-mockup relative w-full max-w-xs aspect-[9/18] bg-gray-900 rounded-[3rem] shadow-2xl p-4 overflow-hidden"
+                    >
+                        <div
+                            class="absolute inset-x-0 top-2 h-4 bg-gray-800 rounded-full mx-auto w-24"
+                        ></div>
+                        <div
+                            id="preview-content"
+                            class="h-full w-full bg-black rounded-[2.5rem] flex flex-col p-4 space-y-2 overflow-y-auto"
+                        >
+                            <!-- App Header -->
+                            <div
+                                class="flex items-center justify-between text-white mb-2"
+                            >
+                                <span class="font-bold text-sm"
+                                    >Subsunlock</span
+                                >
+                                <div
+                                    class="flex items-center bg-blue-600 px-3 py-1 rounded-full text-xs"
+                                >
+                                    <span class="mr-1">+</span>
+                                    Create Link
+                                </div>
+                            </div>
+
+                            <!-- Unlock Section -->
+                            <div
+                                class="flex-grow flex flex-col items-center justify-center p-2 text-white"
+                            >
+                                <div
+                                    id="preview-title-container"
+                                    class="text-center"
+                                >
+                                    <h2
+                                        id="preview-title"
+                                        class="font-semibold text-lg"
+                                    >
+                                        Unlock Your Link
+                                    </h2>
+                                    <p
+                                        id="preview-subtitle"
+                                        class="text-xs text-gray-400"
+                                    >
+                                        Complete the actions and unlock the link
+                                    </p>
+                                </div>
+                                <div
+                                    id="preview-buttons"
+                                    class="mt-4 w-full space-y-2"
+                                >
+                                    <button
+                                        class="w-full bg-red-600 text-white rounded-full py-2 text-sm font-medium"
+                                    >
+                                        Subscribe on Youtube
+                                    </button>
+                                    <button
+                                        class="w-full bg-red-600 text-white rounded-full py-2 text-sm font-medium"
+                                    >
+                                        Live Video on Youtube
+                                    </button>
+                                    <button
+                                        class="w-full bg-green-600 text-white rounded-full py-2 text-sm font-medium"
+                                    >
+                                        Join Group on Whatsapp
+                                    </button>
+                                    <button
+                                        class="w-full bg-blue-600 text-white rounded-full py-2 text-sm font-medium"
+                                    >
+                                        Join on Telegram
+                                    </button>
+                                    <button
+                                        class="w-full bg-gray-700 text-white rounded-full py-2 text-sm font-medium"
+                                    >
+                                        Follow on Tiktok
+                                    </button>
+                                    <button
+                                        class="w-full bg-purple-600 text-white rounded-full py-2 text-sm font-medium"
+                                    >
+                                        Follow on Instagram
+                                    </button>
+                                    <button
+                                        class="w-full bg-blue-600 text-white rounded-full py-2 text-sm font-medium"
+                                    >
+                                        Follow on Facebook
+                                    </button>
+                                </div>
+
+                                <div
+                                    class="w-full mt-4 text-xs text-gray-400 text-center"
+                                >
+                                    <span id="preview-progress-text"
+                                        >Unlock Progress 0/7</span
+                                    >
+                                    <div
+                                        class="w-full bg-gray-700 rounded-full h-1 mt-1"
+                                    >
+                                        <div
+                                            id="preview-progress-bar"
+                                            class="bg-green-500 h-1 rounded-full w-[0%]"
+                                        ></div>
+                                    </div>
+                                </div>
+
+                                <button
+                                    id="preview-unlock-btn"
+                                    class="w-full bg-gray-500 text-white rounded-full py-3 text-sm font-bold mt-4 cursor-not-allowed"
+                                    disabled
+                                >
+                                    Unlock Link
+                                </button>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="text-center text-xs text-gray-500 mt-4">
+                                ©2023 - Made with
+                                <span class="font-bold">Subsunlock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area (form section) -->
+        <main
+            class="w-full max-w-7xl flex flex-col items-center p-6 md:p-12 gap-8"
+        >
+            <header class="text-center">
+                <h1 class="text-3xl font-bold">
+                    Grow Your Social Media Followers Organically.
+                </h1>
+                <p class="text-sm text-gray-400 mt-2">
+                    Subsunlock helps you convert your viewers into subscribers
+                    by requiring them to complete actions before unlocking your
+                    content.
+                </p>
+            </header>
+
+            <!-- Form and Control Panel -->
+            <div
+                class="w-full flex flex-col md:flex-row items-start justify-center gap-8"
+            >
+                <!-- Left Side (Mobile Mockup) -->
+                <div
+                    id="second-mockup-container"
+                    class="md:w-1/3 hidden flex-shrink-0 flex justify-center mt-8 md:mt-0"
+                >
+                    <div
+                        class="phone-mockup relative w-full max-w-xs aspect-[9/18] bg-gray-900 rounded-[3rem] shadow-2xl p-4 overflow-hidden"
+                    >
+                        <div
+                            class="absolute inset-x-0 top-2 h-4 bg-gray-800 rounded-full mx-auto w-24"
+                        ></div>
+                        <div
+                            id="second-preview-content"
+                            class="h-full w-full bg-black rounded-[2.5rem] flex flex-col p-4 space-y-2 overflow-y-auto"
+                        >
+                            <!-- App Header -->
+                            <div
+                                class="flex items-center justify-between text-white mb-2"
+                            >
+                                <span class="font-bold text-sm"
+                                    >Subsunlock</span
+                                >
+                                <div
+                                    class="flex items-center bg-blue-600 px-3 py-1 rounded-full text-xs"
+                                >
+                                    <span class="mr-1">+</span>
+                                    Create Link
+                                </div>
+                            </div>
+
+                            <!-- Unlock Section -->
+                            <div
+                                class="flex-grow flex flex-col items-center justify-center p-2 text-white"
+                            >
+                                <div
+                                    id="second-preview-title-container"
+                                    class="text-center"
+                                >
+                                    <h2
+                                        id="second-preview-title"
+                                        class="font-semibold text-lg"
+                                    >
+                                        Unlock Your Link
+                                    </h2>
+                                    <p
+                                        id="second-preview-subtitle"
+                                        class="text-xs text-gray-400"
+                                    >
+                                        Complete the actions and unlock the link
+                                    </p>
+                                </div>
+                                <div
+                                    id="second-preview-buttons"
+                                    class="mt-4 w-full space-y-2"
+                                >
+                                    <!-- Preview buttons will be injected here by JS -->
+                                </div>
+
+                                <div
+                                    class="w-full mt-4 text-xs text-gray-400 text-center"
+                                >
+                                    <span id="second-preview-progress-text">
+                                        Unlock Progress 0/7
+                                    </span>
+                                    <div
+                                        class="w-full bg-gray-700 rounded-full h-1 mt-1"
+                                    >
+                                        <div
+                                            id="second-preview-progress-bar"
+                                            class="bg-green-500 h-1 rounded-full w-[0%]"
+                                        ></div>
+                                    </div>
+                                </div>
+
+                                <button
+                                    id="second-preview-unlock-btn"
+                                    class="w-full bg-gray-500 text-white rounded-full py-3 text-sm font-bold mt-4 cursor-not-allowed"
+                                    disabled
+                                >
+                                    Unlock Link
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side (Control Panel) -->
+                <div
+                    class="w-full md:w-2/3 lg:w-1/2 bg-white rounded-lg shadow-lg p-6 space-y-6"
+                >
+                    <!-- Warning Alert -->
+                    <div
+                        class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md flex items-center"
+                        role="alert"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                            />
+                        </svg>
+                        <p class="text-sm">
+                            Adult links are strictly prohibited and will be
+                            banned.
+                        </p>
+                    </div>
+
+                    <!-- Input Fields - Title and Subtitle -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="relative w-full sm:w-1/2">
+                            <input
+                                id="title-input"
+                                type="text"
+                                placeholder=" "
+                                class="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-blue-500 transition-colors"
+                            />
+                            <label
+                                class="absolute left-3 -top-2 text-xs text-gray-500 bg-white px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 transition-all"
+                            >
+                                Enter your title.. (optional)
+                            </label>
+                        </div>
+                        <div class="relative w-full sm:w-1/2">
+                            <input
+                                id="subtitle-input"
+                                type="text"
+                                placeholder=" "
+                                class="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-blue-500 transition-colors"
+                            />
+                            <label
+                                class="absolute left-3 -top-2 text-xs text-gray-500 bg-white px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 transition-all"
+                            >
+                                Enter your sub title.. (optional)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Buttons -->
+                    <div
+                        id="social-buttons"
+                        class="flex flex-wrap items-center gap-2"
+                    >
+                        <button
+                            class="social-btn bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-red-600"
+                            data-social="Youtube"
+                        >
+                            Youtube
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-green-500"
+                            data-social="Whatsapp"
+                        >
+                            Whatsapp
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-sky-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-sky-500"
+                            data-social="Telegram"
+                        >
+                            Telegram
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-black text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-black"
+                            data-social="TikTok"
+                        >
+                            TikTok
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-purple-600"
+                            data-social="Website"
+                        >
+                            Website
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-blue-600"
+                            data-social="Instagram"
+                        >
+                            Instagram
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-blue-800"
+                            data-social="Facebook"
+                        >
+                            Facebook
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-gray-400 text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-gray-400"
+                            data-social="X"
+                        >
+                            X
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-blue-600"
+                            data-social="Discord"
+                        >
+                            Discord
+                            <span class="font-bold">+</span>
+                        </button>
+                        <button
+                            class="social-btn bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            data-color="bg-blue-600"
+                            data-social="Destination"
+                        >
+                            Destination
+                            <span class="font-bold">+</span>
+                        </button>
+                    </div>
+
+                    <!-- Advanced Option Button -->
+                    <div class="text-center">
+                        <button
+                            class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-300 transition-colors"
+                        >
+                            Advanced Option +
+                        </button>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-4">
+                        <div
+                            class="flex items-center justify-between text-sm font-semibold text-gray-600"
+                        >
+                            <div class="flex items-center gap-1">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    class="w-4 h-4 text-red-600"
+                                >
+                                    <path
+                                        d="M12.75 1.5a.75.75 0 0 0-1.5 0V8.665c0 .245.215.445.46.445h.58a.45.45 0 0 0 .45-.445V1.5Z"
+                                    />
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.558 13.992a2.25 2.25 0 0 1 2.242 2.242v4.516a2.25 2.25 0 0 1-2.242 2.242h-1.516a2.25 2.25 0 0 1-2.242-2.242v-4.516a2.25 2.25 0 0 1 2.242-2.242h1.516Zm6.75-3.328a.75.75 0 0 0-1.5 0V15a.75.75 0 0 1-1.5 0v-4.336a.75.75 0 0 0-1.28-.528l-3.528 3.528a.75.75 0 0 0 0 1.06l3.528 3.528a.75.75 0 0 0 1.06-1.06l-3.265-3.265 3.265-3.265a.75.75 0 0 0-.232-1.28Zm-15 0a.75.75 0 0 0-1.5 0V15a.75.75 0 0 1-1.5 0v-4.336a.75.75 0 0 0-1.28-.528L3.66 14.772a.75.75 0 0 0 0 1.06l3.528 3.528a.75.75 0 0 0 1.06-1.06l-3.265-3.265 3.265-3.265a.75.75 0 0 0-.232-1.28Z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                Youtube
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button
+                                class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            >
+                                Subscribe +
+                            </button>
+                            <button
+                                class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            >
+                                Subscribe #2 +
+                            </button>
+                            <button
+                                class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            >
+                                Like +
+                            </button>
+                            <button
+                                class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            >
+                                Comment +
+                            </button>
+                            <button
+                                class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1"
+                            >
+                                Like + Comment +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Button and URL Inputs -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="relative w-full sm:w-1/2">
+                            <input
+                                type="text"
+                                placeholder=" "
+                                class="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-blue-500 transition-colors"
+                            />
+                            <label
+                                class="absolute left-3 -top-2 text-xs text-gray-500 bg-white px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 transition-all"
+                            >
+                                Enter Button Name.. (optional)
+                            </label>
+                        </div>
+                        <div class="relative w-full sm:w-1/2">
+                            <input
+                                type="text"
+                                placeholder=" "
+                                class="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-blue-500 transition-colors"
+                            />
+                            <label
+                                class="absolute left-3 -top-2 text-xs text-gray-500 bg-white px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 transition-all"
+                            >
+                                Enter Destination or File URL link.
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Select and Action Buttons -->
+                    <div class="flex items-center justify-end gap-4 mt-6">
+                        <div
+                            class="flex items-center gap-2 text-sm font-medium text-gray-600"
+                        >
+                            <label for="style-select">Select style:</label>
+                            <select
+                                id="style-select"
+                                class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                            >
+                                <option>Style 1</option>
+                                <option>Style 2</option>
+                                <option>Style 3</option>
+                                <option selected>Style 4</option>
+                            </select>
+                        </div>
+                        <button
+                            class="bg-gray-200 text-gray-700 px-6 py-2 rounded-md font-medium hover:bg-gray-300 transition-colors"
+                        >
+                            Generate
+                        </button>
+                        <button
+                            id="preview-btn"
+                            class="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 transition-colors"
+                        >
+                            Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Features Section -->
+        <section class="w-full max-w-7xl mx-auto p-6 md:p-12 text-center">
+            <h2 class="text-3xl font-bold mb-4">Features of Subsunlock</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-10">
+                Subsunlock helps you grow your brand so you can focus on what
+                matters, creating content.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature Card 1 -->
+                <div
+                    class="feature-card bg-white rounded-lg p-6 shadow-md border border-gray-200 flex flex-col items-center text-center delay-100"
+                >
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-8 h-8 text-blue-600"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M11.42 15.17L17.25 21l2.58-2.58m-1.95-3.32h.008v.008h-.008Zm0 0-7.394 7.393M7.5 13.5v-.008h-.008V13.5H7.5Zm0 0-.102 1.638L16.273 1.26a.75.75 0 0 1 1.04 1.04l-14.75 14.75M16.273 1.26a.75.75 0 0 1 1.04 1.04L8.71 16.29a.75.75 0 0 0-.232 1.28L4.66 21.34a.75.75 0 0 1-1.06-1.06l3.528-3.528a.75.75 0 0 0 0-1.06L3.66 14.772a.75.75 0 0 1 1.28-.528L14.772 17.5a.75.75 0 0 0 1.06-1.06l-3.528-3.528a.75.75 0 0 1 .528-1.28Z"
+                            />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Free & Easy</h3>
+                    <p class="text-gray-500 text-sm">
+                        Subsunlock is completely free, just create a social key
+                        & share. take your content to the next level and reach a
+                        wider audience.
+                    </p>
+                </div>
+                <!-- Feature Card 2 -->
+                <div
+                    class="feature-card bg-white rounded-lg p-6 shadow-md border border-gray-200 flex flex-col items-center text-center delay-200"
+                >
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-8 h-8 text-blue-600"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.555 1.76a.75.75 0 0 0-.75-.75h-2.55a.75.75 0 0 0-.75.75v3.185c0 .265.215.48.48.48H12a.75.75 0 0 0 .75-.75V1.5a.75.75 0 0 1 .75-.75h.51a.75.75 0 0 1 .75.75V4.74c0 .265.215.48.48.48h1.22c.265 0 .48-.215.48-.48V1.5c0-.414-.336-.75-.75-.75H13.5a.75.75 0 0 0-.75.75v3.24c0 .265.215.48.48.48h1.22c.265 0 .48-.215.48-.48V1.5c0-.414-.336-.75-.75-.75H13.5Z"
+                            />
+                            <path
+                                fill-rule="evenodd"
+                                d="M12 1.5a.75.75 0 0 0-.75-.75h-2.55a.75.75 0 0 0-.75.75v3.185c0 .265.215.48.48.48H12a.75.75 0 0 0 .75-.75V1.5a.75.75 0 0 1 .75-.75h.51a.75.75 0 0 1 .75.75V4.74c0 .265.215.48.48.48h1.22c.265 0 .48-.215.48-.48V1.5c0-.414-.336-.75-.75-.75H13.5a.75.75 0 0 0-.75.75v3.24c0 .265.215.48.48.48h1.22c.265 0 .48-.215.48-.48V1.5c0-.414-.336-.75-.75-.75H13.5Z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Always Free Tool</h3>
+                    <p class="text-gray-500 text-sm">
+                        Subsunlock is completely free to use and we have always
+                        been able to keep it free and easy to use.
+                    </p>
+                </div>
+                <!-- Feature Card 3 -->
+                <div
+                    class="feature-card bg-white rounded-lg p-6 shadow-md border border-gray-200 flex flex-col items-center text-center delay-300"
+                >
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-8 h-8 text-blue-600"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a3.75 3.75 0 0 1-5.303-5.303l1.5-1.5a2.25 2.25 0 0 1 3.182 0l1.5 1.5a.75.75 0 0 0 1.06-1.06l-1.5-1.5a3.75 3.75 0 0 0-5.303 0l-1.5 1.5a4.5 4.5 0 0 0 0 6.364l4.5 4.5a4.5 4.5 0 0 0 6.364 0l1.5-1.5a.75.75 0 0 0-1.06-1.06l-1.5 1.5a3.75 3.75 0 0 1-5.303 0l-4.5-4.5a3.75 3.75 0 0 1 0-5.303l1.5-1.5a2.25 2.25 0 0 0 0-3.182Z"
+                            />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">
+                        Easy Shortlink Pages
+                    </h3>
+                    <p class="text-gray-500 text-sm">
+                        We provide simple short link pages so that your visitors
+                        can easily download/destination link.
+                    </p>
+                </div>
+                <!-- Feature Card 4 -->
+                <div
+                    class="feature-card bg-white rounded-lg p-6 shadow-md border border-gray-200 flex flex-col items-center text-center delay-400"
+                >
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-8 h-8 text-blue-600"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM15 9l-6 6M15 15l-6-6"
+                            />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">
+                        No Click Manipulation
+                    </h3>
+                    <p class="text-gray-500 text-sm">
+                        We never Stop/Manipulate/Fake the number of clicks of
+                        our partners as others do.
+                    </p>
+                </div>
+                <!-- Feature Card 5 -->
+                <div
+                    class="feature-card bg-white rounded-lg p-6 shadow-md border border-gray-200 flex flex-col items-center text-center delay-500"
+                >
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-8 h-8 text-blue-600"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 21.75a9.75 9.75 0 1 0 0-19.5 9.75 9.75 0 0 0 0 19.5ZM12 6v6l4 2-1 3-3-4Z"
+                            />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Highest Rate</h3>
+                    <p class="text-gray-500 text-sm">
+                        We provide a $7 CPM for worldwide traffic, ensuring the
+                        best price for our publishers.
+                    </p>
+                </div>
+                <!-- Feature Card 6 -->
+                <div
+                    class="feature-card bg-white rounded-lg p-6 shadow-md border border-gray-200 flex flex-col items-center text-center delay-100"
+                >
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-8 h-8 text-blue-600"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM15 9l-6 6M15 15l-6-6"
+                            />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Helping Creators</h3>
+                    <p class="text-gray-500 text-sm">
+                        You can use our services to increase your social media
+                        subscribers, Followers and more.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="w-full max-w-7xl mx-auto p-6 md:p-12">
+            <header class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">
+                    Frequently asked questions
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Turn fans into followers. Get the recognition you deserve by
+                    using social unlock to allow your fans to take action before
+                    unlocking your content.
+                </p>
+            </header>
+
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- FAQ Column 1 -->
+                <div class="w-full md:w-1/2 space-y-4">
+                    <div
+                        class="accordion-item bg-white rounded-lg shadow-md border border-gray-200 p-4 cursor-pointer"
+                        onclick="toggleFAQ(this)"
+                    >
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-gray-800">
+                                What is Subsunlock / sub to unlock / sub for
+                                unlock?
+                            </h3>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="accordion-icon w-5 h-5 text-gray-500 transition-transform duration-300"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-gray-500">
+                                Use social unlocking to offer fans digital items
+                                such as downloadable files, coupon codes, secret
+                                links, or YouTube streams. To unlock the digital
+                                item, fans complete one or more actions that you
+                                customize.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="accordion-item bg-white rounded-lg shadow-md border border-gray-200 p-4 cursor-pointer"
+                        onclick="toggleFAQ(this)"
+                    >
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-gray-800">
+                                How does Subsunlock work?
+                            </h3>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="accordion-icon w-5 h-5 text-gray-500 transition-transform duration-300"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-gray-500">
+                                Subsunlock works by generating a special link
+                                that requires users to complete a specific
+                                action, such as subscribing to a YouTube channel
+                                or following a social media page, before they
+                                can access the hidden content or link.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="accordion-item bg-white rounded-lg shadow-md border border-gray-200 p-4 cursor-pointer"
+                        onclick="toggleFAQ(this)"
+                    >
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-gray-800">
+                                Is using this site safe or following community
+                                rules?
+                            </h3>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="accordion-icon w-5 h-5 text-gray-500 transition-transform duration-300"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-gray-500">
+                                Yes, our site is designed to be safe and to
+                                follow the community rules of major social media
+                                platforms. We do not use any manipulative
+                                tactics and all actions are performed by real
+                                users.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Column 2 -->
+                <div class="w-full md:w-1/2 space-y-4">
+                    <div
+                        class="accordion-item bg-white rounded-lg shadow-md border border-gray-200 p-4 cursor-pointer"
+                        onclick="toggleFAQ(this)"
+                    >
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-gray-800">
+                                Subscribers provided by this website is real or
+                                fake?
+                            </h3>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="accordion-icon w-5 h-5 text-gray-500 transition-transform duration-300"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-gray-500">
+                                The subscribers provided by locked links will be
+                                100% real because they will be relevant to your
+                                channel and your videos and they will watch each
+                                of your videos because the people who subscribe
+                                to you will be engaged with your content and
+                                they will follow each of your videos.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="accordion-item bg-white rounded-lg shadow-md border border-gray-200 p-4 cursor-pointer"
+                        onclick="toggleFAQ(this)"
+                    >
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-gray-800">
+                                Is there a limit to generating links?
+                            </h3>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="accordion-icon w-5 h-5 text-gray-500 transition-transform duration-300"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-gray-500">
+                                There are no limits to how many links you can
+                                generate. You can create as many as you need to
+                                share your content and grow your audience.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="accordion-item bg-white rounded-lg shadow-md border border-gray-200 p-4 cursor-pointer"
+                        onclick="toggleFAQ(this)"
+                    >
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-gray-800">
+                                What happened if users use adult type links?
+                            </h3>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="accordion-icon w-5 h-5 text-gray-500 transition-transform duration-300"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-gray-500">
+                                Adult links are strictly prohibited and will be
+                                banned. We have automated systems in place to
+                                detect and remove such content to ensure a safe
+                                environment for all users.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer
+            class="w-full bg-slate-900 text-gray-400 py-10 px-6 md:px-12 text-center mt-auto"
+        >
+            <div
+                class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4"
+            >
+                <div
+                    class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4"
+                >
+                    <div class="flex items-center space-x-2">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            class="w-6 h-6 text-blue-500"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M13.5 10.5V6a2.25 2.25 0 0 0-2.25-2.25H6L5.25 3H3a.75.75 0 0 0-.75.75v16.5c0 .414.336.75.75.75h2.25l.75-.75h4.5a2.25 2.25 0 0 0 2.25-2.25v-4.5h2.25L18 12.75h3.75a.75.75 0 0 0 .75-.75v-1.5a.75.75 0 0 0-.75-.75H18L15.75 9Z"
+                            />
+                        </svg>
+                        <span class="font-bold text-lg text-white"
+                            >Subsunlock</span
+                        >
+                    </div>
+                    <span class="text-sm">
+                        Subsunlock is premium sub to unlock platform. Access
+                        premium features with our Subsunlock. Get started now!
+                        Explore Subsunlock and enjoy seamless access to premium
+                        features.
+                    </span>
+                </div>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm">
+                    <a href="#" class="hover:text-white transition-colors">
+                        Terms of service
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        Privacy Policy
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        About
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            function toggleFAQ(element) {
+                const content = element.querySelector(".accordion-content");
+                const isActive = content.classList.contains("active");
+
+                // Close all other active accordion items
+                document
+                    .querySelectorAll(".accordion-content.active")
+                    .forEach((item) => {
+                        if (item !== content) {
+                            item.classList.remove("active");
+                            item.parentElement.classList.remove("active");
+                        }
+                    });
+
+                // Toggle the clicked one
+                content.classList.toggle("active");
+                element.classList.toggle("active");
+            }
+
+            document
+                .getElementById("preview-btn")
+                .addEventListener("click", function () {
+                    const title =
+                        document.getElementById("title-input").value ||
+                        "Unlock Your Link";
+                    const subtitle =
+                        document.getElementById("subtitle-input").value ||
+                        "Complete the actions and unlock the link";
+
+                    // Show the second mockup
+                    const secondMockupContainer = document.getElementById(
+                        "second-mockup-container"
+                    );
+                    secondMockupContainer.classList.remove("hidden");
+
+                    document.getElementById(
+                        "second-preview-title"
+                    ).textContent = title;
+                    document.getElementById(
+                        "second-preview-subtitle"
+                    ).textContent = subtitle;
+
+                    const socialButtonsContainer =
+                        document.getElementById("social-buttons");
+                    const selectedButtons =
+                        socialButtonsContainer.querySelectorAll(
+                            ".social-btn.selected"
+                        );
+                    const previewButtonsContainer = document.getElementById(
+                        "second-preview-buttons"
+                    );
+                    previewButtonsContainer.innerHTML = "";
+
+                    if (selectedButtons.length > 0) {
+                        selectedButtons.forEach((button) => {
+                            const socialName =
+                                button.getAttribute("data-social");
+                            const socialColor =
+                                button.getAttribute("data-color");
+
+                            const newButton = document.createElement("button");
+                            newButton.className = `w-full text-white rounded-full py-2 text-sm font-medium ${socialColor}`;
+                            newButton.textContent = `Follow on ${socialName}`;
+
+                            // Specific text for Youtube, Whatsapp and Telegram
+                            if (socialName === "Youtube") {
+                                newButton.textContent = "Subscribe on Youtube";
+                            }
+                            if (socialName === "Whatsapp") {
+                                newButton.textContent =
+                                    "Join Group on Whatsapp";
+                            }
+                            if (socialName === "Telegram") {
+                                newButton.textContent = "Join on Telegram";
+                            }
+                            if (socialName === "Destination") {
+                                newButton.textContent = "Unlock Link";
+                            }
+
+                            previewButtonsContainer.appendChild(newButton);
+                        });
+                    } else {
+                        // If no buttons are selected, show a placeholder
+                        const placeholder = document.createElement("div");
+                        placeholder.className =
+                            "w-full text-center text-gray-500 text-sm italic";
+                        placeholder.textContent =
+                            "Select social media to preview";
+                        previewButtonsContainer.appendChild(placeholder);
+                    }
+
+                    const totalSelected = selectedButtons.length;
+                    const progressText = document.getElementById(
+                        "second-preview-progress-text"
+                    );
+                    const progressBar = document.getElementById(
+                        "second-preview-progress-bar"
+                    );
+                    const unlockBtn = document.getElementById(
+                        "second-preview-unlock-btn"
+                    );
+
+                    if (totalSelected > 0) {
+                        progressText.textContent = `Unlock Progress 0/${totalSelected}`;
+                        progressBar.style.width = "0%";
+
+                        unlockBtn.classList.remove(
+                            "bg-gray-500",
+                            "cursor-not-allowed"
+                        );
+                        unlockBtn.classList.add("bg-green-500");
+                        unlockBtn.disabled = false;
+                    } else {
+                        progressText.textContent = `Unlock Progress 0/0`;
+                        progressBar.style.width = "0%";
+
+                        unlockBtn.classList.add(
+                            "bg-gray-500",
+                            "cursor-not-allowed"
+                        );
+                        unlockBtn.classList.remove("bg-green-500");
+                        unlockBtn.disabled = true;
+                    }
+                });
+
+            document.querySelectorAll(".social-btn").forEach((button) => {
+                button.addEventListener("click", function () {
+                    this.classList.toggle("selected");
+                    this.classList.toggle("bg-white");
+                    this.classList.toggle("text-black");
+
+                    // Toggle colors based on selection
+                    if (this.classList.contains("selected")) {
+                        this.classList.remove(
+                            "bg-red-600",
+                            "bg-green-500",
+                            "bg-sky-500",
+                            "bg-black",
+                            "bg-purple-600",
+                            "bg-blue-600",
+                            "bg-blue-800",
+                            "bg-gray-400"
+                        );
+                        this.classList.add(
+                            "bg-gray-800",
+                            "text-white",
+                            "hover:bg-gray-700"
+                        );
+                    } else {
+                        const socialColor = this.getAttribute("data-color");
+                        this.classList.remove(
+                            "bg-gray-800",
+                            "text-white",
+                            "hover:bg-gray-700"
+                        );
+                        this.classList.add(socialColor);
+                        if (
+                            socialColor === "bg-gray-400" ||
+                            socialColor === "bg-white"
+                        ) {
+                            this.classList.remove("text-white");
+                            this.classList.add("text-black");
+                        } else {
+                            this.classList.remove("text-black");
+                            this.classList.add("text-white");
+                        }
+                    }
+                });
+            });
+
+            // Intersection Observer for feature cards
+            const featureCards = document.querySelectorAll(".feature-card");
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("animate-fade-in");
+                            observer.unobserve(entry.target); // Stop observing once animated
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1, // Trigger when 10% of the item is visible
+                }
+            );
+
+            featureCards.forEach((card) => {
+                observer.observe(card);
+            });
+        </script>
+    </body>
+</html>
